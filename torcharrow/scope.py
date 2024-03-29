@@ -56,7 +56,8 @@ class Scope:
             self.config = type(self).default_config
         elif isinstance(config, str):
             path = config
-            self.config = {**type(self).default_config, **json.load(open(path))}
+            with open(path) as f:
+                self.config = {**type(self).default_config, **json.load(f)}
         elif isinstance(config, dict):
             self.config = {**type(self).default_config, **config}
 
